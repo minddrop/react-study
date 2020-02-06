@@ -1,17 +1,15 @@
 import * as React from 'react'
 
-interface IProps {
-    name?: string;
+interface Props {
+  name?: string
 }
 
-const Header: React.SFC<IProps> = (props: IProps) => (
-    <h1>
-        Hello, {props.name}! Welcome to React and TypeScript.
-    </h1>
+const Header: React.SFC<Props> = (props: Props) => (
+  <h1>Hello, {props.name}! Welcome to React and TypeScript.</h1>
 )
 
 Header.defaultProps = {
-    name: 'world'
+  name: 'world'
 }
 
 export default Header

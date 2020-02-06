@@ -1,22 +1,81 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Description from './Description'
-import Header from './Header'
+import React from 'react'
+import styled, { createGlobalStyle } from 'styled-components'
+import { Link } from 'react-router-dom'
 
-class App extends React.Component{
-  public render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo"/>
-          <Header name="REACT" />
-        </header>
-        <Description countBy={3} />
-      </div>
-    );
-  }
+import logo from './logo.svg'
+import { Path } from './routes'
+
+const App: React.FC = () => {
+  return (
+    <>
+      <GlobalStyle />
+
+      <Wrapper>
+        <Header>
+          <Logo src={logo} className="App-logo" alt="logo" />
+          <Text>
+            Edit <CodeText>src/App.tsx</CodeText> and save to reload.
+          </Text>
+          <OfficialLink
+            className="App-link"
+            href="https://reactjs.org"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Learn React
+          </OfficialLink>
+          <OtameshiLink to={Path.otameshi}>おためしへ</OtameshiLink>
+        </Header>
+      </Wrapper>
+    </>
+  )
 }
 
+const GlobalStyle = createGlobalStyle`
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+  }
+`
 
-export default App;
+const Wrapper = styled.div`
+  text-align: center;
+`
+
+const Header = styled.header`
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+`
+
+const Logo = styled.img`
+  height: 40vmin;
+`
+
+const OfficialLink = styled.a`
+  color: #09d3ac;
+`
+
+const Text = styled.p``
+
+const CodeText = styled.code``
+
+const OtameshiLink = styled(Link)`
+  color: #fff;
+  margin-top: 30px;
+`
+
+export default App
