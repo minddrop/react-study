@@ -15,7 +15,7 @@ const searchGoogleBooks = async (searchString: string): Promise<any> => {
   }
 }
 
-export const Otameshi: React.FC = () => {
+export const Book: React.FC = () => {
   const [searchString, changeSearchString] = useState('')
   const [searchResult, changeSearchResult] = useState<VolumeList>(
     new VolumeList()

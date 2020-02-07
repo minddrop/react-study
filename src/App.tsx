@@ -24,7 +24,7 @@ const App: React.FC = () => {
           >
             Learn React
           </OfficialLink>
-          <OtameshiLink to={Path.otameshi}>おためしへ</OtameshiLink>
+          <BookLink to={Path.book}>Book Search</BookLink>
         </Header>
       </Wrapper>
     </>
@@ -73,7 +73,7 @@ const Text = styled.p``
 
 const CodeText = styled.code``
 
-const OtameshiLink = styled(Link)`
+const BookLink = styled(Link)`
   color: #fff;
   margin-top: 30px;
 `

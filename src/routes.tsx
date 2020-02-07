@@ -2,19 +2,19 @@ import React from 'react'
 import { Redirect, Route, Switch } from 'react-router-dom'
 
 import App from './App'
-import { Otameshi } from './Otameshi'
+import { Book } from './Book'
 import { Layout } from './Layout'
 
 export const Path = {
   app: '/',
-  otameshi: '/otameshi'
+  book: '/book'
 }
 
 const routes = (
   <Layout>
     <Switch>
       <Route exact path={Path.app} component={App} />
-      <Route exact path={Path.otameshi} component={Otameshi} />
+      <Route exact path={Path.book} component={Book} />
       <Redirect to={Path.app} />
     </Switch>
   </Layout>
