@@ -28,19 +28,6 @@ export const Book: React.FC = () => {
 
   const dispatch = useDispatch()
 
-  const handleOnSearchButton = async (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ): Promise<any> => {
-    event.preventDefault()
-
-    const result = await searchGoogleBooks(searchString)
-    if (result.isSuccess)
-      dispatch(
-        GoogleBooksActions.setVolumes(VolumeList.fromResponse(result.data))
-      )
-    else window.alert(String(result.error))
-  }
-
   return (
     <Wrapper>
       <Body>
@@ -51,7 +38,10 @@ export const Book: React.FC = () => {
             onChange={event => changeSearchString(event.target.value)}
           />
           <SearchButton
-            onClick={event => handleOnSearchButton(event)}
+            onClick={event => {
+              event.preventDefault()
+              dispatch(GoogleBooksActions.getVolumes(searchString))
+            }}
             disabled={!searchString}
           >
             Search

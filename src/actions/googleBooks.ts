@@ -5,5 +5,6 @@ import { VolumeList } from '../models/Volume'
 const actionCreator = actionCreatorFactory('GoogleBooks')
 
 export const GoogleBooksActions = {
+  getVolumes: actionCreator<string>('getVolumes'),
   setVolumes: actionCreator<VolumeList>('setVolumes')
 }
