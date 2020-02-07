@@ -25,6 +25,7 @@ const App: React.FC = () => {
             Learn React
           </OfficialLink>
           <BookLink to={Path.book}>Book Search</BookLink>
+          <BookLink to={Path.weather}>Weather Forecast</BookLink>
         </Header>
       </Wrapper>
     </>
