@@ -1,8 +1,13 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { VolumeList } from './models/Volume'
+import { State } from '../../reducers/index'
+import { GoogleBooksActions } from '../../actions/googleBooks'
+import { VolumeList } from '../../models/Volume'
+
+import { SearchResult } from './SearchResult'
 
 const searchGoogleBooks = async (searchString: string): Promise<any> => {
   const url = 'https://www.googleapis.com/books/v1/volumes'
@@ -17,17 +22,22 @@ const searchGoogleBooks = async (searchString: string): Promise<any> => {
 
 export const Book: React.FC = () => {
   const [searchString, changeSearchString] = useState('')
-  const [searchResult, changeSearchResult] = useState<VolumeList>(
-    new VolumeList()
-  )
+  const { volumeList } = useSelector((state: State) => ({
+    volumeList: state.googleBooks.volumeList
+  }))
+
+  const dispatch = useDispatch()
 
   const handleOnSearchButton = async (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ): Promise<any> => {
     event.preventDefault()
+
     const result = await searchGoogleBooks(searchString)
     if (result.isSuccess)
-      changeSearchResult(VolumeList.fromResponse(result.data))
+      dispatch(
+        GoogleBooksActions.setVolumes(VolumeList.fromResponse(result.data))
+      )
     else window.alert(String(result.error))
   }
 
@@ -37,7 +47,7 @@ export const Book: React.FC = () => {
         <Title>Google Books Search</Title>
         <SearchForm>
           <Input
-            placeholder="検索ワードを入力してね！"
+            placeholder="Enter Keyword"
             onChange={event => changeSearchString(event.target.value)}
           />
           <SearchButton
@@ -47,15 +57,7 @@ export const Book: React.FC = () => {
             Search
           </SearchButton>
         </SearchForm>
-        {searchResult && (
-          <ResultContent>
-            {searchResult.items.map((item: any) => {
-              return (
-                <ResultTitle key={item.id}>{item.volumeInfo.title}</ResultTitle>
-              )
-            })}
-          </ResultContent>
-        )}
+        {volumeList.kind && <SearchResult volumeList={volumeList} />}
       </Body>
     </Wrapper>
   )
@@ -105,17 +107,5 @@ const SearchButton = styled.button`
   &:disabled {
     background-color: #bfbfbf;
     cursor: not-allowed;
-  }
-`
-
-const ResultContent = styled.div`
-  margin-top: 20px;
-`
-
-const ResultTitle = styled.div`
-  padding: 10px 0;
-  border-bottom: 1px solid;
-  &:first-of-type {
-    border-top: 1px solid;
   }
 `

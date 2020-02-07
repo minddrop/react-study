@@ -2,7 +2,7 @@ import React from 'react'
 import { Redirect, Route, Switch } from 'react-router-dom'
 
 import App from './App'
-import { Book } from './Book'
+import { Book } from './components/Book'
 import { Layout } from './Layout'
 
 export const Path = {

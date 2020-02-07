@@ -5,8 +5,8 @@ import { JSObject } from '../types/Common'
 
 export class ImageLinks extends Record<{
   smallThumnail: string
-  thumnail: string
-}>({ smallThumnail: '', thumnail: '' }) {
+  thumbnail: string
+}>({ smallThumnail: '', thumbnail: '' }) {
   static fromResponse(response: JSObject) {
     const params = { ...response }
     return new ImageLinks(params)
